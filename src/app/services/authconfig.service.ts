@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import { AuthConfig, NullValidationHandler, OAuthService } from 'angular-oauth2-oidc';
+import {
+  AuthConfig,
+  NullValidationHandler,
+  OAuthService,
+} from 'angular-oauth2-oidc';
 import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class AuthConfigService {
-
   private _decodedAccessToken: any;
   private _decodedIDToken: any;
-  get decodedAccessToken() { return this._decodedAccessToken; }
-  get decodedIDToken() { return this._decodedIDToken; }
+  get decodedAccessToken() {
+    return this._decodedAccessToken;
+  }
+  get decodedIDToken() {
+    return this._decodedIDToken;
+  }
 
   constructor(
     private readonly oauthService: OAuthService,
     private readonly authConfig: AuthConfig
-  ) { }
+  ) {}
 
   async initAuth(): Promise<any> {
     return new Promise((resolveFn, rejectFn) => {
@@ -24,32 +31,37 @@ export class AuthConfigService {
 
       // subscribe to token events
       this.oauthService.events
-        .pipe(filter((e: any) => {
-          return e.type === 'token_received';
-        }))
+        .pipe(
+          filter((e: any) => {
+            return e.type === 'token_received';
+          })
+        )
         .subscribe(() => this.handleNewToken());
 
       // in your wrapper service, add:
       this.oauthService.events
-        .pipe(filter(e => ['session_terminated', 'session_error'].includes(e.type)))
-        .subscribe(e => {
+        .pipe(
+          filter((e) =>
+            ['session_terminated', 'session_error'].includes(e.type)
+          )
+        )
+        .subscribe((e) => {
           // another app/tab logged us out, let's handle it here
-          console.log("another app/tab logged us out")
-          this.oauthService.logOut()
+          console.log('another app/tab logged us out');
+          this.oauthService.logOut();
         });
 
       // continue initializing app or redirect to login-page
 
-      this.oauthService.loadDiscoveryDocumentAndLogin().then(isLoggedIn => {
+      this.oauthService.loadDiscoveryDocumentAndLogin().then((isLoggedIn) => {
         if (isLoggedIn) {
           this.oauthService.setupAutomaticSilentRefresh();
-          resolveFn();
+          resolveFn(null);
         } else {
           this.oauthService.initImplicitFlow();
           rejectFn();
         }
       });
-
     });
   }
 
@@ -57,5 +69,4 @@ export class AuthConfigService {
     this._decodedAccessToken = this.oauthService.getAccessToken();
     this._decodedIDToken = this.oauthService.getIdToken();
   }
-
 }
