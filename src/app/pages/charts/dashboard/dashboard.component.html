@@ -1,0 +1,300 @@
+<div class="row fullscreen" id="fullscreen">
+  <div class="col-fixed-4">
+    <div class="row">
+      <div class="col-md-6" *ngFor="let item of conversations_amount">
+        <nb-alert
+          class="center_element"
+          [status]="item.color"
+          *ngIf="item.format == 'status'"
+        >
+          <div class="box-title">
+            {{ item.title }}
+          </div>
+          <div class="box-value">
+            {{ item.value }}
+          </div>
+        </nb-alert>
+        <nb-alert
+          class="center_element"
+          [outline]="item.color"
+          *ngIf="item.format == 'outline'"
+        >
+          <div class="box-title">
+            {{ item.title }}
+          </div>
+          <div class="box-value">
+            {{ item.value }}
+          </div>
+        </nb-alert>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" *ngFor="let item of conversations_time">
+        <nb-alert class="center_element" [outline]="item.color">
+          <div class="box-title">
+            {{ item.title }}
+          </div>
+          <div class="box-value-time">
+            {{ item.value }}
+          </div>
+        </nb-alert>
+      </div>
+    </div>
+  </div>
+  <div class="col-fixed-8 top-area">
+    <nb-card class="box-line-chart">
+      <nb-card-header
+        >Calls Monitor
+        <!-- <span class="right-box">
+          <button nbButton size="tiny" (click)="toggleSetting()">
+            <nb-icon icon="settings-2" pack="eva"></nb-icon>
+          </button>
+        </span> -->
+      </nb-card-header>
+      <nb-card-body>
+        <ngx-dashboard-chart [trigger]="data_chart"></ngx-dashboard-chart>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div
+    [className]="
+      agents_data_count.agent_backup == 0 ? 'col-fixed-9' : 'col-fixed-6'
+    "
+  >
+    <nb-card class="bottom-area">
+      <nb-card-body>
+        <div class="agent_mode_backup" *ngIf="setting.agent_mode == 'backup'">
+          <div class="row backup">
+            <div
+              [className]="agents_backup.length == 1 ? 'col-md-12' : 'col-md-6'"
+              *ngFor="let user of agents_backup; let i = index"
+            >
+              <strong *ngIf="i == 0">Backup</strong
+              ><strong *ngIf="i != 0">&nbsp;</strong>
+              <ngx-agent-box
+                [user]="user"
+                [agent_status_text]="agent_status_text"
+                [display_calltime]="display_calltime_backup[i]"
+                [agent_length]="agents_backup.length"
+              >
+              </ngx-agent-box>
+            </div>
+            <div *ngIf="agents_backup.length == 0" [className]="'col-md-12'">
+              <strong>Backup</strong><strong>&nbsp;</strong>
+              <ngx-agent-box
+                [agent_length]="'0'"
+                [user]="user"
+                [agent_status_text]=""
+                [display_calltime]=""
+              >
+              </ngx-agent-box>
+            </div>
+          </div>
+        </div>
+        <div class="agent_mode_normal" *ngIf="setting.agent_mode == 'normal'">
+          <div class="row call_taker">
+            <div
+              [className]="
+                agents_call_taker.length == 1
+                  ? 'col-md-12'
+                  : agents_call_taker.length <= 2
+                  ? 'col-md-6'
+                  : agents_call_taker.length == 3
+                  ? 'col-md-4'
+                  : agents_call_taker.length == 4
+                  ? 'col-md-3'
+                  : agents_call_taker.length <= 6
+                  ? 'col-md-2'
+                  : 'col-xs-1-10'
+              "
+              *ngFor="let user of agents_call_taker; let i = index"
+            >
+              <strong *ngIf="i == 0">Call taker</strong
+              ><strong *ngIf="i != 0">&nbsp;</strong>
+              <ngx-agent-box
+                [user]="user"
+                [agent_status_text]="agent_status_text"
+                [display_calltime]="display_calltime_call_taker[i]"
+                [agent_length]="agents_call_taker.length"
+              >
+              </ngx-agent-box>
+            </div>
+            <div
+              *ngIf="agents_call_taker.length == 0"
+              [className]="'col-md-12'"
+            >
+              <strong>Call taker</strong><strong>&nbsp;</strong>
+              <ngx-agent-box
+                [agent_length]="'0'"
+                [user]="user"
+                [agent_status_text]=""
+                [display_calltime]=""
+              >
+              </ngx-agent-box>
+            </div>
+          </div>
+          <hr *ngIf="agents.length != 0" />
+          <div class="row call_taker">
+            <div
+              [className]="
+                agents_coordinator.length == 1 ? 'col-md-6' : 'col-md-3'
+              "
+              *ngFor="let user of agents_coordinator; let i = index"
+            >
+              <strong *ngIf="i == 0">Coordinator</strong
+              ><strong *ngIf="i != 0">&nbsp;</strong>
+              <ngx-agent-box
+                [user]="user"
+                [agent_status_text]="agent_status_text"
+                [display_calltime]="display_calltime_coordinator[i]"
+                [agent_length]="agents_coordinator.length"
+              >
+              </ngx-agent-box>
+            </div>
+            <div
+              *ngIf="agents_coordinator.length == 0"
+              [className]="'col-md-6'"
+            >
+              <strong>Coordinator</strong><strong>&nbsp;</strong>
+              <ngx-agent-box
+                [agent_length]="'0'"
+                [user]="user"
+                [agent_status_text]=""
+                [display_calltime]=""
+              >
+              </ngx-agent-box>
+            </div>
+            <div class="vl"></div>
+            <div
+              [className]="
+                agents_non_emergency.length == 1 ? 'col-md-6' : 'col-md-3'
+              "
+              *ngFor="let user of agents_non_emergency; let i = index"
+            >
+              <strong *ngIf="i == 0">Non-Emergency</strong
+              ><strong *ngIf="i != 0">&nbsp;</strong>
+              <ngx-agent-box
+                [user]="user"
+                [agent_status_text]="agent_status_text"
+                [display_calltime]="display_calltime_non_emergency[i]"
+                [agent_length]="agents_non_emergency.length"
+              >
+              </ngx-agent-box>
+            </div>
+            <div
+              *ngIf="agents_non_emergency.length == 0"
+              [className]="'col-md-6'"
+            >
+              <strong>Non-Emergency</strong><strong>&nbsp;</strong>
+              <ngx-agent-box
+                [agent_length]="'0'"
+                [user]="user"
+                [agent_status_text]=""
+                [display_calltime]=""
+              >
+              </ngx-agent-box>
+            </div>
+          </div>
+          <hr *ngIf="agents.length != 0" />
+          <div class="row call_taker">
+            <div
+              [className]="
+                agents_dispatcher.length == 1
+                  ? 'col-md-6'
+                  : agents_dispatcher.length == 2
+                  ? 'col-md-3'
+                  : 'col-md-2'
+              "
+              *ngFor="let user of agents_dispatcher; let i = index"
+            >
+              <strong *ngIf="i == 0">Dispatcher</strong
+              ><strong *ngIf="i != 0">&nbsp;</strong>
+              <ngx-agent-box
+                [user]="user"
+                [agent_status_text]="agent_status_text"
+                [display_calltime]="display_calltime_dispatcher[i]"
+                [agent_length]="agents_dispatcher.length"
+              >
+              </ngx-agent-box>
+            </div>
+            <div *ngIf="agents_dispatcher.length == 0" [className]="'col-md-6'">
+              <strong>Dispatcher</strong><strong>&nbsp;</strong>
+              <ngx-agent-box
+                [agent_length]="'0'"
+                [user]="user"
+                [agent_status_text]=""
+                [display_calltime]=""
+              >
+              </ngx-agent-box>
+            </div>
+            <div class="vl"></div>
+            <div
+              [className]="
+                agents_supervisor.length == 1 ? 'col-md-6' : 'col-md-3'
+              "
+              *ngFor="let user of agents_supervisor; let i = index"
+            >
+              <strong *ngIf="i == 0">Supervisor</strong
+              ><strong *ngIf="i != 0">&nbsp;</strong>
+              <ngx-agent-box
+                [user]="user"
+                [agent_status_text]="agent_status_text"
+                [display_calltime]="display_calltime_supervisor[i]"
+                [agent_length]="agents_supervisor.length"
+              >
+              </ngx-agent-box>
+            </div>
+            <div *ngIf="agents_supervisor.length == 0" [className]="'col-md-6'">
+              <strong>Supervisor</strong><strong>&nbsp;</strong>
+              <ngx-agent-box
+                [agent_length]="'0'"
+                [user]="user"
+                [agent_status_text]=""
+                [display_calltime]=""
+              >
+              </ngx-agent-box>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-fixed-3" *ngIf="agents_data_count.agent_backup > 0">
+    <nb-card class="bottom-area">
+      <nb-card-body>
+        <div class="agent_mode_backup">
+          <div class="row backup">
+            <div
+              class="box-backup-agent"
+              [className]="agents_backup.length <= 3 ? 'col-md-12' : 'col-md-6'"
+              *ngFor="let user of agents_backup; let i = index"
+            >
+              <strong *ngIf="i == 0">Backup</strong
+              ><strong *ngIf="i != 0">&nbsp;</strong>
+              <ngx-agent-box
+                [user]="user"
+                [agent_status_text]="agent_status_text"
+                [display_calltime]="display_calltime_backup[i]"
+                [agent_length]="agents_backup.length"
+              >
+              </ngx-agent-box>
+            </div>
+            <div *ngIf="agents_backup.length == 0" [className]="'col-md-12'">
+              <strong>Backup</strong><strong>&nbsp;</strong>
+              <ngx-agent-box
+                [agent_length]="'0'"
+                [user]="user"
+                [agent_status_text]=""
+                [display_calltime]=""
+              >
+              </ngx-agent-box>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-fixed-3 box-abandon-list">
+    <!--    <ngx-abandon-list [abandon_lists]="abandon_lists"></ngx-abandon-list>-->
+  </div>
+</div>

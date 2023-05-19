@@ -1,0 +1,117 @@
+@import '@nebular/theme/styles/global/breakpoints';
+@import '../../styles/themes';
+
+@include nb-install-component() {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+  }
+
+  nb-action {
+    height: auto;
+    display: flex;
+    align-content: center;
+  }
+
+  nb-user {
+    cursor: pointer;
+  }
+
+  ::ng-deep nb-search button {
+    padding: 0!important;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+
+    .sidebar-toggle {
+      @include nb-ltr(padding-right, 1.25rem);
+      @include nb-rtl(padding-left, 1.25rem);
+      text-decoration: none;
+      color: nb-theme(text-hint-color);
+      nb-icon {
+        font-size: 1.75rem;
+      }
+    }
+
+    .logo {
+      padding: 0 1.25rem;
+      font-size: 1.75rem;
+      @include nb-ltr(border-left, 1px solid nb-theme(divider-color));
+      @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
+      white-space: nowrap;
+      text-decoration: none;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .control-item {
+      display: none;
+    }
+    .user-action {
+      border: none;
+      padding: 0;
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    nb-select {
+      display: none;
+    }
+  }
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: #00d68f;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.full_screen {
+  margin-right: 15px;
+}
+
+.block {
+  display: block;
+}
+
+.center_element {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+nb-badge {
+  position: relative;
+  margin-top: -18px;
+}
+
+::ng-deep nb-layout-header {
+  height: 50px;
+}
+
+::ng-deep nb-layout-header nav {
+  height: 3rem !important;
+}
+
+::ng-deep .layout-container {
+  padding-top: 3rem !important;
+}
+
+::ng-deep nb-sidebar {
+  top: 3rem !important;
+}
+
+::ng-deep nb-sidebar .main-container {
+  top: 3rem !important;
+}

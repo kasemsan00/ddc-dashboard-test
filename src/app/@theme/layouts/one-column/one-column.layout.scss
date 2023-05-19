@@ -1,0 +1,9 @@
+@import '../../styles/themes';
+@import '@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .menu-sidebar ::ng-deep .scrollable {
+    padding-top: nb-theme(layout-padding-top);
+    display: none !important;
+  }
+}

@@ -1,0 +1,6 @@
+<div>
+    <button nbButton [status]="value? 'primary': 'basic'" size="tiny"
+        (click)="selectOption(true)">{{ yesTitle }}</button>&nbsp;
+    <button nbButton [status]="!value? 'primary': 'basic'" size="tiny"
+        (click)="selectOption(false)">{{ noTitle }}</button>
+</div>

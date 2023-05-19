@@ -1,0 +1,6 @@
+{
+    "env_mode": "develop",
+    "url_backend": "https://cis-api-admin.dems1669.com",
+    "url_mapper": "https://cis-api-admin.dems1669.com/mapper-agent/v1/users",
+    "network_policy": "public"
+}

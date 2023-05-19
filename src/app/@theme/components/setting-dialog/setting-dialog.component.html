@@ -1,0 +1,130 @@
+<div class="row">
+  <nb-card size="large">
+    <nb-card-header>
+      <nb-icon icon="settings-2" pack="eva"></nb-icon>&nbsp;Setting
+      <span style="color: gray; font-size: 12px">(V1.3.2.dev-public)</span>
+    </nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="label">Range of data</label>
+              <ngx-btn-switch
+                [yesTitle]="'Last 24 Hours'"
+                [noTitle]="'Today'"
+                [value]="
+                  form.get('chart_format')?.value === '24hr' ? true : false
+                "
+                (valueChange)="selectChartFormatChange($event)"
+              >
+              </ngx-btn-switch>
+            </div>
+            <div class="form-group">
+              <label class="label">Agent Display name</label>
+              <ngx-btn-switch
+                [yesTitle]="'Name'"
+                [noTitle]="'Username'"
+                [value]="
+                  form.get('display_name')?.value === 'name' ? true : false
+                "
+                (valueChange)="selectDisplayNameChange($event)"
+              >
+              </ngx-btn-switch>
+            </div>
+            <!-- <div class="form-group">
+                            <label for="" class="label">Agent mode</label>
+                            <ngx-btn-switch [yesTitle]="'Normal'" [noTitle]="'Backup'"
+                                [value]="form.get('agent_mode').value=='normal'? true: false"
+                                (valueChange)="selectAgentModeChange($event)">
+                            </ngx-btn-switch>
+                        </div> -->
+            <div class="form-group">
+              <label class="label">Abandon Sorting pattern</label>
+              <ngx-btn-switch
+                [yesTitle]="'Count'"
+                [noTitle]="'Time'"
+                [value]="
+                  form.get('abandon_lists_sorting_format')?.value === 'count'
+                    ? true
+                    : false
+                "
+                (valueChange)="
+                  selectAbandonListsSortingFormatFormatChange($event)
+                "
+              >
+              </ngx-btn-switch>
+            </div>
+            <div class="form-group">
+              <label class="label">Duration of data syncing</label>
+              <nb-select
+                placeholder="Select Duration"
+                [(selected)]="durationSelected"
+                (selectedChange)="durationChange($event)"
+              >
+                <nb-option
+                  [value]="item.value"
+                  *ngFor="let item of duration_sync"
+                  >{{ item.text }}
+                </nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="label">Incoming label</label>
+              <ngx-btn-switch
+                [yesTitle]="'Show'"
+                [noTitle]="'Hide'"
+                [value]="
+                  form.get('incoming_label')?.value === 'show' ? true : false
+                "
+                (valueChange)="selectIncomingChange($event)"
+              >
+              </ngx-btn-switch>
+            </div>
+            <div class="form-group">
+              <label class="label">Answered label</label>
+              <ngx-btn-switch
+                [yesTitle]="'Show'"
+                [noTitle]="'Hide'"
+                [value]="
+                  form.get('answered_label')?.value === 'show' ? true : false
+                "
+                (valueChange)="selectAnsweredChange($event)"
+              >
+              </ngx-btn-switch>
+            </div>
+            <div class="form-group">
+              <label class="label">Abandoned label</label>
+              <ngx-btn-switch
+                [yesTitle]="'Show'"
+                [noTitle]="'Hide'"
+                [value]="
+                  form.get('abandoned_label')?.value === 'show' ? true : false
+                "
+                (valueChange)="selectAbandonedChange($event)"
+              >
+              </ngx-btn-switch>
+            </div>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton (click)="dismiss()">close</button>&nbsp;
+      <button nbButton hero status="primary" (click)="saveSetting()">
+        Save</button
+      >&nbsp;
+      <button
+        nbButton
+        hero
+        status="warning"
+        (click)="clearNoti()"
+        *ngIf="show_cls_noti_btn"
+      >
+        Clear Notifications
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</div>
