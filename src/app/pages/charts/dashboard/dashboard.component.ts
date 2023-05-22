@@ -11,7 +11,6 @@ import { timer } from 'rxjs';
 import { D1669Service } from '../../../services/d1669.service';
 import { environment } from '../../../../environments/environment';
 import * as screenfull from 'screenfull';
-import { AuthService } from '../../../services/auth.service';
 import { NbDialogService, NbToastRef } from '@nebular/theme';
 import { Router, ActivatedRoute } from '@angular/router';
 import { interval, forkJoin, Subscription } from 'rxjs';
@@ -194,7 +193,6 @@ export class DashboardComponent {
   constructor(
     iconsLibrary: NbIconLibraries,
     private _d1669Service: D1669Service,
-    private auth: AuthService,
     private dialogService: NbDialogService,
     private toastrService: NbToastrService,
     private router: Router,
@@ -1115,7 +1113,7 @@ export class DashboardComponent {
   }
 
   fetchUserMapper() {
-    this.user = this.auth.getIdentityClaims();
+    // this.user = this.auth.getIdentityClaims();
   }
 
   secToTime(sec: any) {

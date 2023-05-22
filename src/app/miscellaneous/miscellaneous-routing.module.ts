@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MiscellaneousComponent } from './miscellaneous.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 const routes: Routes = [
   {
@@ -14,10 +13,6 @@ const routes: Routes = [
         path: '404',
         component: NotFoundComponent,
       },
-      {
-        path: '403',
-        component: ForbiddenComponent,
-      },
     ],
   },
 ];
@@ -26,5 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MiscellaneousRoutingModule {
-}
+export class MiscellaneousRoutingModule {}

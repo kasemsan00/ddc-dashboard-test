@@ -1,23 +1,43 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
-
+import {
+  NbMenuModule,
+  NbCardModule,
+  NbUserModule,
+  NbListModule,
+  NbAlertModule,
+  NbIconModule,
+  NbBadgeModule,
+  NbProgressBarModule,
+  NbButtonModule,
+  NbRadioModule,
+  NbSelectModule,
+  NbSidebarModule,
+  NbDialogModule,
+  NbToastrModule,
+} from '@nebular/theme';
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { AuthService } from '../services/auth.service'
 
 @NgModule({
   imports: [
     PagesRoutingModule,
     ThemeModule,
-    NbMenuModule,
+    NbMenuModule.forRoot(),
+    NbCardModule,
+    NbUserModule,
+    NbListModule,
+    NbAlertModule,
+    NbIconModule,
+    NbBadgeModule,
+    NbProgressBarModule,
+    NbButtonModule,
+    NbRadioModule,
+    NbSelectModule,
+    NbToastrModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbSidebarModule.forRoot(),
   ],
-  declarations: [
-    PagesComponent,
-  ],
-  providers: [
-    AuthService,
-  ]
+  declarations: [PagesComponent],
 })
-export class PagesModule {
-}
+export class PagesModule {}

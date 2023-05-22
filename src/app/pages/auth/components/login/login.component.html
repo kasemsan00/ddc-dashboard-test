@@ -1,0 +1,34 @@
+<!--begin::Heading-->
+<div class="text-center mb-10">
+  <h1 class="text-dark mb-3 fs-1 fw-bold">D1422 - Quality Management</h1>
+</div>
+<!--end::Heading-->
+
+<!--begin::Action-->
+<div class="text-center">
+  <!-- <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5"
+      [disabled]="loginForm.invalid">
+      <ng-container *ngIf="isLoading$ | async">
+        <span class="indicator-progress" [style.display]="'block'">
+          Please wait...
+          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+        </span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Continue to login</span>
+      </ng-container>
+    </button> -->
+  <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5"
+    (click)="login()">เข้าสู่ระบบ</button>
+</div>
+<!--end::Action-->
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <span role="alert">
+        {{ message }}
+      </span>
+    </div>
+  </ng-container>
+</ng-template>

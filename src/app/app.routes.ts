@@ -8,7 +8,6 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
-import { LogoutComponent } from './auth/logout/logout.component';
 
 export const routes: Routes = [
   {
@@ -18,13 +17,9 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () =>
+      import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
-  {
-    path: 'logout',
-    component: LogoutComponent,
-  },
-
   {
     path: 'auth2',
     component: NbAuthComponent,

@@ -10,7 +10,7 @@ import {
 import { UserData } from '../../../@core/data/users';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, timer } from 'rxjs';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../pages/auth';
 import screenfull from 'screenfull';
 import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute } from '@angular/router';
@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //   .pipe(takeUntil(this.destroy$))
     //   .subscribe((users: any) => this.user = users.nick);
 
-    this.user = this.auth.getIdentityClaims();
+    this.user = this.auth.identityClaims;
 
     this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item.title);

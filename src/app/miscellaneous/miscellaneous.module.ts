@@ -5,7 +5,6 @@ import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousRoutingModule } from './miscellaneous-routing.module';
 import { MiscellaneousComponent } from './miscellaneous.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   imports: [
@@ -14,10 +13,6 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     NbButtonModule,
     MiscellaneousRoutingModule,
   ],
-  declarations: [
-    MiscellaneousComponent,
-    NotFoundComponent,
-    ForbiddenComponent,
-  ],
+  declarations: [MiscellaneousComponent, NotFoundComponent],
 })
-export class MiscellaneousModule { }
+export class MiscellaneousModule {}
